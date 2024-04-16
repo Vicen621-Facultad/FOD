@@ -59,8 +59,8 @@ begin
       posMin := i;
   end;
 
-  min := ventas[i];
-  leer(detalles[i], ventas[i]);
+  min := ventas[posMin];
+  leer(detalles[posMin], ventas[posMin]);
 end;
 
 procedure actualizarMaestro(var mae: maestro; var detalles: arr_detalle);
