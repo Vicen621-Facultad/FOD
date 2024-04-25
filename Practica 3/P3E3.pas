@@ -122,11 +122,12 @@ end;
 
 procedure eliminarNovela(var arch: archivo);
 var
-  nov, aux: novela;
+  nov, cabecera: novela;
   codigo, posRegister: integer;
   found: boolean;
 begin
   Reset(arch);
+  Read(arch, cabecera);
   Write('Ingrese el codigo de novela que desea eliminar: '); ReadLn(codigo);
 
   found := false;
@@ -137,14 +138,11 @@ begin
   end;
 
   if (found) then begin
-    posRegister := FilePos(arch) - 1; // Me guardo la posicion del registro a borrar
-    Seek(arch, 0); // Voy al header de la lista
-    Read(arch, aux); // Leo el header de la lista
-    Seek(arch, posRegister - 1); // Voy a la pos del registro borrado
-    Write(arch, aux); // Guardo el antiguo registro cabecera en la pos del registro borrado
-    Seek(arch, 0); // Voy al header
-    aux.codigo := -1 * posRegister; // Actualizo el header con la nueva pos borrada
-    Write(arch, aux); // Escribo el header
+    Seek(arch, filePos(arch) - 1); // Voy al registro anterior para escribir el header
+    Write(arch, cabecera); // Escribio el antiguo header en el registro borrado
+    cabecera.codigo := filePos(arch) * -1; // Actualizo el header
+    Seek(arch, 0);
+    Write(arch, cabecera); // Escribo el header en la posicion 0
     WriteLn('--- Novela ', nov.nombre, ' eliminada exitosamente! ---');
   end
   else
