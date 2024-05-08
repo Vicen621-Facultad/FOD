@@ -1,4 +1,4 @@
-program P4E1;
+program P4E3;
 
 const
   M = 4;
@@ -10,9 +10,16 @@ type
     ingreso: integer;
   end;
 
+  reg_node = record
+    dni: String[8];
+    nrr: integer;
+  end;
+
+  // TODO: Preguntar si este nodo esta bien así
   nodo = record
+    hoja_anterior: integer;
     cant_claves: integer;
-    claves: array[1..M-1] of alumno;
+    claves: array[1..M-1] of reg_node;
     hijos: array[1..M] of integer;
   end;
 
