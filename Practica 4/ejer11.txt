@@ -1,0 +1,59 @@
+Ejercicio 11
+
+TODO: Preguntar lecturas y escrituras, tambien cosas con ?
+
+Árbol B | M = 5
+
+Arbol Inicial:
+            2: 0(76)4(300)1(600)3
+0: (21)(45)(46)(70) 4: (100)(200) 1: (400) 3: (700)(800)
+
+
+Baja 76 
+Leo el nodo 2 (raíz) desde memoria secundaria e itero sobre sus elementos hasta encontrar un elemento mayor o igual que el 76
+Como el elemento encontrado es igual al 76, y el nodo actual tiene hijos (no es una hoja), debo intercambiar el elemento 76 con el elemento mas chico del subarbol derecho, es decir, el elemento 100 del nodo 4
+Leo el nodo 4 y hago el intercambio, una vez hecho el intercambio puedo borrar el 76, como el nodo 4 no tiene underflow termina la Baja  TODO:?
+
+Lecturas y escrituras: L2 L4 E2 E4 -> 2 lecturas y 2 escrituras
+Arbol resultante:
+            2: 0(100)4(300)1(600)3
+0: (21)(45)(46)(70) 4: (200) 1: (400) 3: (700)(800)
+
+
+Baja 400
+Leo el nodo 2 (raíz) desde memoria secundaria e itero sobre sus elementos hasta encontrar un elemento mayor o igual que 400
+El elemento encontrado es 600, el cual es mayor que 400, entonces leo el hijo izquierdo del mismo
+Leo el nodo 1 desde memoria secundaria e itero sobre sus elementos hasta encontrar un elemento mayor o igual que 400
+Como el unico elemento del nodo 1 es el 400 y el nodo 1 no tiene hijos (es una hoja) se puede proceder al borrado
+Una vez borrado el elemento 400, el nodo 1 queda en underflow por ende intento redistribuir con el nodo 4, como esto no es posible debo fusionar los nodos 1 y 4 quedando el siguiente Arbol
+
+Lecturas y escrituras: L2 L1 E1 L3 L4 E2 E4 E3 -> 4 lecturas 4 escrituras
+Arbol resultante:                                       | stack |
+            2: 0(100)4(600)3                            | ----- |
+0: (21)(45)(46)(70) 4: (200)(300) 3: (700)(800)         |   1   |
+
+
+Alta 900
+Leo el nodo 2 (raiz) desde memoria secundaria e itero sobre sus elementos hasta encontrar un elemento mayor que 900
+Como no encontre un elemento mayor o igual que 900, debo leer el nodo 3 (hijo mas a la derecha)
+Leo el nodo 3, compruebo si el nodo es una hoja, como es una hoja compruebo si hay espacio para ingresar el elemento, como lo hay añado el 900 al nodo 3
+
+Lecturas y escrituras: L2 L3 E3 -> 2 lecturas 1 escritura
+Arbol resultante:                                            | stack |
+            2: 0(100)4(600)3                                 | ----- |
+0: (21)(45)(46)(70) 4: (200)(300) 3: (700)(800)(900)         |   1   |
+
+
+Alta 12
+Leo el nodo 2 (raiz) desde memoria secundaria e itero sobre sus elementos hasta encontrar un elemento mayor que 12
+El elemento encontrado es 100, el cual es mayor que el 12, por ende leo su hizo izquierdo
+Leo el nodo 0, compruebo si es una hoja, como es una hoja compruebo si hay espacio para ingresar el elemento
+No hay espacio para ingresar el elemento, por ende el nodo entra en overflow y hay que tratarlo.
+Los elementos que estan en overflow son: (12)(21)(45)(46)(70)
+los 2 elementos mas chicos se quedan en el nodo 0
+el elemento del medio (45) se promociona a la raiz y los 2 elementos mas grandes se guardan en un nuevo nodo, en este caso como hay un nodo guardado en la pila de nodos vacios se usara ese mismo
+
+Lecturas y escrituras: L2 L0 E0 E1 E2  -> 2 lecturas 3 escrituras
+Arbol resultante:
+            2: 0(45)1(100)4(600)3
+0: (12)(21) 1: (46)(70) 4: (200)(300) 3: (700)(800)(900)
