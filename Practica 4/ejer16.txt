@@ -1,0 +1,29 @@
+Ejercicio 16
+
+Dado el siguiente árbol B + de orden 4 y con política de resolución de underflows a derecha, realice las siguientes operaciones indicando lecturas y escrituras en el orden de ocurrencia. Además, debe describir detalladamente lo que sucede en cada operación. +80, -400.
+                    4: 0 (340) 1 (400) 2 (500) 3
+0: (11)(50)(77) -> 1: (340)(350)(360) -> 2: (402)(410)(420) -> 3: (520)(530) -1
+
++80
+Leo el nodo 4 (raiz) y busco una clave mayor al 80
+Una vez encontrado, leo el hijo izquierdo de dicha clave, en este caso el nodo 0
+Comparo la cantidad actual de elementos del nodo 0 con 3, como es igual significa que el nodo está en overflow con la nueva clave
+Divido el nodo 0 en 2 quedando el 11 y el 50 en el nodo 0 y creo un nuevo nodo (nodo 5) en donde almaceno el 77 y el 80, la nueva clave. Promociono la clave 77 a la raiz.
+Comparo la cantidad actual de elementos del nodo 4 con 3, como es igual significa que el nodo está en overflow con la nueva clave. Como el nodo 4 es la raíz debo crear 2 nuevos nodos, el nodo 6 y el nodo 7
+Divido el nodo 4 en 2 quedando el 77 (la nueva clave) y el 340 en el nodo 4, el 500 en el nodo 6 y promociono el 400 al nodo 7, siendo este ultimo la nueva raiz del arbol
+
+L4 L0 E0 E5 E4 E6 E7 -> 2 lecturas 5 escrituras
+
+
+                                7: 4(400)6
+                    4: 0(77)5(340)1      6: 2(500)3
+0: (11)(50) -> 5:(77)(80) -> 1: (340)(350)(360) -> 2: (402)(410)(420) -> 3: (520)(530) -1
+
+-400
+Leo el nodo 4 (raíz) y busco una clave mayor al 400
+Como no encuentro ninguna clave mayor al 400, ingreso por el hijo mas a la derecha del nodo 7
+Leo el nodo 6 y busco una clave mayor al 400, una vez encontrada leo el hijo izquierdo de dicha clave
+Leo el nodo 2 y busco una clave mayor o igual al 400, como no la encuentro y el nodo 2 no tiene hijos el 400 no se encuentra en el arbol
+                                7: 4(400)6
+                    4: 0(77)5(340)1      6: 2(500)3
+0: (11)(50) -> 5:(77)(80) -> 1: (340)(350)(360) -> 2: (402)(410)(420) -> 3: (520)(530) -1
