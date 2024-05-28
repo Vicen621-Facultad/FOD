@@ -54,7 +54,6 @@ var
 begin
   posMin := 1;
   for i := 1 to CANT_ARCHIVOS do begin
-    //WriteLN(ventas[i].cod, ' <= ', ventas[posMin].cod);
     if (ventas[i].cod <= ventas[posMin].cod) then
       posMin := i;
   end;

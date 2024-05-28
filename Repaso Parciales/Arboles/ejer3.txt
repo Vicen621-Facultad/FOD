@@ -1,0 +1,81 @@
+M = 4, politica: izquierda o derecha
+        2: 0(63)1
+0: (23)(43) -> 1:(63)(67)(90)
+
++131
+Leo la raiz (nodo 2), busco una llave mas grande que 131
+Como no la encuentro leo el hijo de mas de la derecha (nodo 1)
+Como el nodo 1 no tiene hijos se que estoy en una hoja y puedo proceder a la insercion
+Comparo la cantidad de registros del nodo 1 con 3 porque el arbol es de orden 4
+Como la cantidad de registros en el nodo 1 es igual a 3, debo resolver el overflow
+Divido el nodo 1 quedando los registros 63 y 67 en el nodo 1 y creo un nuevo nodo para almacenar los datos 90 y 131, uno el nodo 1 con el nodo 3 y promociono la llave 90 al nodo 2
+Uno el nodo 2 con el nodo 3 terminando de esta manera la insercion
+
+L2 L1 E1 E3 E2 -> 2 lecturas y 3 escrituras
+
+            2: 0(63)1(90)3
+0: (23)(43) -> 1:(63)(67)3 -> 3:(90)(131)
+
+
++115
+L2 L3 E3 -> 2 lecturas y 1 escritura
+
+            2: 0(63)1(90)3
+0: (23)(43) -> 1:(63)(67)3 -> 3:(90)(115)(131)
+
+
++50
+L2 L0 E0 -> 2 lecturas y 1 escritura
+
+                    2: 0(63)1(90)3
+0: (23)(43)(50) -> 1:(63)(67)3 -> 3:(90)(115)(131)
+
+
++70
+L2 L1 E1 -> 2 lecturas y 1 escritura
+
+                    2: 0(63)1(90)3
+0: (23)(43)(50) -> 1:(63)(67)(70)3 -> 3:(90)(115)(131)
+
++10
+L2 L0 E0 E4 E2 -> 2 lecturas y 3 escritura
+
+                    2: 0(43)4(63)1(90)3
+0: (10)(23) -> 4:(43)(50) -> 1:(63)(67)(70)3 -> 3:(90)(115)(131)
+
+-43
+L2 L4 E4 -> 2 lecturas y 1 escritura
+
+                    2: 0(43)4(63)1(90)3
+0: (10)(23) -> 4:(50) -> 1:(63)(67)(70)3 -> 3:(90)(115)(131)
+
+-50
+L2 L4 E4 E1 E2 -> 2 lecturas y 3 escritura
+
+                    2: 0(43)4(67)1(90)3
+0: (10)(23) -> 4:(63) -> 1:(67)(70)3 -> 3:(90)(115)(131)
+
++65
+L2 L4 E4 -> 2 lecturas y 1 escritura
+
+                    2: 0(43)4(67)1(90)3
+0: (10)(23) -> 4:(63)(65) -> 1:(67)(70)3 -> 3:(90)(115)(131)
+
+-10
+L2 L0 E0 -> 2 lecturas y 1 escritura
+
+                    2: 0(43)4(67)1(90)3
+0: (23) -> 4:(63)(65) -> 1:(67)(70)3 -> 3:(90)(115)(131)
+
+-23
+L2 L0 E0 E4 E2 -> 2 lecturas y 3 escritura
+
+                    2: 0(65)4(67)1(90)3
+0: (63) -> 4:(65) -> 1:(67)(70)3 -> 3:(90)(115)(131)
+
+-63
+L2 L0 E0 E4 E2 -> 2 lecturas y 3 escritura
+
+            2: 4(67)1(90)3                      | stack |
+4:(65) -> 1:(67)(70)3 -> 3:(90)(115)(131)       |   0   |
+
