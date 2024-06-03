@@ -40,11 +40,11 @@ var
   especie: reg_especie;
 begin
   Seek(arch, fileSize(arch) - 1);
-  Read(arch, especie);
+  Read(arch, especie); // Leo ultimo registro
   Seek(arch, reg_pos - 1);
-  Write(arch, especie);
-  Seek(arch, fileSize(arch) - 1);
-  Truncate(arch);
+  Write(arch, especie); // Escribo el ultimo reg en la posicion del registro a borrar
+  Seek(arch, fileSize(arch) - 1); // Voy a la ultima pos del archivo
+  Truncate(arch); // Trunco para no tener duplicdos
 end;
 
 procedure eliminarEspecies(var arch: archivo);
